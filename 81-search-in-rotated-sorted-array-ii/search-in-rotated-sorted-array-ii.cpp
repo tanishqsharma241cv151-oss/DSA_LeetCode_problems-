@@ -11,23 +11,22 @@ public:
             else{
                 if(nums[mid]==nums[low] && nums[mid]==nums[high]){
                     low++;high--;
+                    continue;
                 }
-                else{
-                    if(nums[low]<=nums[mid]){
-                        if(nums[low]<=target && target<=nums[mid]){
-                            high=mid-1;
-                        }
-                        else{
-                            low=mid+1;
-                        }
+                if(nums[low]<=nums[mid]){
+                    if(nums[low]<=target && target<=nums[mid]){
+                        high=mid-1;
                     }
                     else{
-                        if(nums[mid]<=target && target<=nums[high]){
-                            low=mid+1;
-                        }
-                        else{
-                            high=mid-1;
-                        }
+                        low=mid+1;
+                    }
+                }
+                else{
+                    if(nums[mid]<=target && target<=nums[high]){
+                        low=mid+1;
+                    }
+                    else{
+                        high=mid-1;
                     }
                 }
             }
