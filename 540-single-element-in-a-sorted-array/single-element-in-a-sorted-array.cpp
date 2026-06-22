@@ -23,6 +23,6 @@ public:
             else{return nums[mid];}
 
         }
-        return nums[low];
+        return 0;
     }
 };
