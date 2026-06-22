@@ -8,21 +8,18 @@ public:
         if(nums[n-1]!=nums[n-2])return nums[n-1];
         while(low<=high){
             int mid=low+(high-low)/2;
-            if(nums[mid]==nums[mid-1] || nums[mid]==nums[mid+1]){
-                if(mid%2==0){                             //when mid is even.
-                    if(nums[mid]==nums[mid+1]) low=mid+1;  //we are on left, element is on right.
-                    else{high=mid-1;}                  //we are on right, element is on left.   
+            if(nums[mid-1]!=nums[mid] && nums[mid+1]!=nums[mid]) return nums[mid];
+            else{
+                if((mid%2==0 && nums[mid]==nums[mid+1]) || (mid%2==1 && nums[mid]==nums[mid-1])){
+                    //we are on the left part and the element is on the right.
+                    low=mid+1;
                 }
-                else{                                   //when mid is odd.
-                    if(nums[mid]==nums[mid-1]) low=mid+1; //we are on left, element is on right.
-                    else{
-                        high=mid-1;
-                        }                                
+                else{
+                    //we are on the right part and element is on the left.
+                    high=mid-1;
                 }
             }
-            else{return nums[mid];}
-
         }
-        return 0;
+        return -1; //dummy statement because we are using a non void function so we need to return something.
     }
 };
