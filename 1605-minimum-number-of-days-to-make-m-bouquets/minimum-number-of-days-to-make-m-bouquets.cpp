@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool bouquets(vector<int>bloomDay,int k,int m,int mid){
+    bool bouquets(vector<int>&bloomDay,int k,int m,int mid){
         int bouquet=0;
         int count=0;
         for(int i=0;i<bloomDay.size();i++){
