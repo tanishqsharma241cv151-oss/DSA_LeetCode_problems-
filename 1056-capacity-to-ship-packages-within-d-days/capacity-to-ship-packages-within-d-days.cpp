@@ -1,15 +1,16 @@
 class Solution {
 public:
     bool possible(vector<int>&weights,int days,int mid){
-        int s=0, d=0;
-        for(int i=0;i<weights.size();i++){
-            s+=weights[i];
-            if(s==mid ||(i+1<weights.size()&& weights[i+1]>mid-s)){
+        int s=0, d=1;
+        for(auto w:weights){
+            if(s+w>mid){
                 d++;
-                s=0;
+                s=w;
             }
+            else{
+                s+=w;
+            }   
         }
-        if(s!=0){d++;s=0;}
         return d<=days;
     }
     int shipWithinDays(vector<int>& weights, int days) {
