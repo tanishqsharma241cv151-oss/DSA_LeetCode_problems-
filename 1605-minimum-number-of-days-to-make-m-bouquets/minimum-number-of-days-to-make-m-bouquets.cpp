@@ -16,11 +16,13 @@ public:
         return bouquet>=m;
     }
     int minDays(vector<int>& bloomDay, int m, int k) {
-        int maxi=*max_element(bloomDay.begin(),bloomDay.end());
-        int mini=*min_element(bloomDay.begin(),bloomDay.end());
+        int maxi=INT_MIN,mini=INT_MAX;
+        for(auto it:bloomDay){
+            mini=min(mini,it);
+            maxi=max(maxi,it);
+        }
         int low=mini,high=maxi;
-        int ans=-1;
-        if(bloomDay.size()< 1LL*m*1LL*k) return -1;
+        if(bloomDay.size()< (long long)m*k) return -1;
         while(low<=high){
             int mid=low+(high-low)/2;
             if(bouquets(bloomDay,k,m,mid)){
