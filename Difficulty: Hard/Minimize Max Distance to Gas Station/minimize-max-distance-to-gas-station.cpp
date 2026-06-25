@@ -2,14 +2,16 @@ class Solution {
   public:
     double minMaxDist(vector<int> &stations, int K) {
         int n=stations.size();
-        if(n<=1)return 0;
-        priority_queue<pair<long double,int>>pq;
+        if(n<=1){return 0;}
         vector<int>howmany(n-1,0);
-        for(int i=0;i<n-1;i++){
+        //store the initial difference between given stations,and the section index in priority queue.
+        priority_queue<pair<long double,int>>pq;
+        for(int i=0;i<n-1;i++){ //arr will have n-1 sections.
             pq.push({stations[i+1]-stations[i],i});
         }
-        for(int gasstations=1;gasstations<=K;gasstations++){
-            auto tp=pq.top();pq.pop();
+        //now start adding stations in sections one by one;
+        for(int gas=1;gas<=K;gas++){
+            auto tp=pq.top(); pq.pop();
             int secind=tp.second;
             howmany[secind]++;
             long double inidiff=stations[secind+1]-stations[secind];
@@ -17,6 +19,5 @@ class Solution {
             pq.push({newseclen,secind});
         }
         return pq.top().first;
-        
     }
 };
