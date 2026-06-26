@@ -1,0 +1,33 @@
+class Solution {
+  public:
+    bool countstations(vector<int>&stations,int K,long double mid){
+        int count=0;
+        for(int i=0;i<stations.size()-1;i++){
+            int diff=(stations[i+1]-stations[i]);
+            int a=diff/mid;
+            count+=diff/mid;
+            if(a*mid==diff){
+                count--;
+            }
+        }
+        return count<=K;
+    }
+    double minMaxDist(vector<int> &stations, int K) {
+        long double low=0,high=0;
+        for(int i=0;i<stations.size()-1;i++){
+            high=max(high,(long double)stations[i+1]-stations[i]);
+        }
+        long double diff=1e-6;
+        while(high-low>=diff){
+            long double mid=low+(high-low)/2.0;
+            if(countstations(stations,K,mid)){
+                high=mid;
+            }
+            else{
+                low=mid;
+            }
+        }
+        return high;
+        
+    }
+};
