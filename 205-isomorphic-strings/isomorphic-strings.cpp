@@ -3,7 +3,7 @@ public:
     bool isIsomorphic(string s, string t) {
         int m=s.size();
         int n=t.size();
-        if(m!=n)return false;
+        
         vector<int>arr1(256,-1);
         vector<int>arr2(256,-1);
         //to track the index of last occurence of a character
