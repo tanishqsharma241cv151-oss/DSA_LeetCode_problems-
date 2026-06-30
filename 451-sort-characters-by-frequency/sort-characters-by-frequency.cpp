@@ -5,17 +5,16 @@ public:
         string ans="";
         unordered_map<char,int>hashmap;
         for(auto it:s) hashmap[it]++;
-        vector<pair<int,char>>v;
+        priority_queue<pair<int,int>>pq;
         for(auto it:hashmap){
-            v.push_back({it.second,it.first});
+            pq.push({it.second,it.first});//element with highest frequency is at the top.
         }
-        sort(v.begin(),v.end());
-        for(auto it:v){
-            for(int i=0;i<it.first;i++){
-                ans+=it.second;
-            }    
+        int m=pq.size();
+        for(int i=0;i<m;i++){
+        
+            ans.append(pq.top().first,pq.top().second);
+            pq.pop(); //removes the topmost element.
         }
-        reverse(ans.begin(),ans.end());
         return ans;
     }
 };
