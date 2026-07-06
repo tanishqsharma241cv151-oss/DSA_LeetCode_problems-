@@ -36,10 +36,9 @@ public:
             ListNode* front1=first->next;
             ListNode* front2=second->next;
             first->next=second;
+            second->next=front1;
             first=front1;
-            second->next=first;
             second=front2;
         }
-        if(first) first->next=nullptr;    
     }
 };
