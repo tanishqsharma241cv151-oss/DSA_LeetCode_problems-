@@ -28,8 +28,6 @@ public:
         }
         if(first) temp->next= first;
         if(second) temp->next=second;
-       
-        
         return dummy.next;
     }
     ListNode* findmiddle(ListNode* head){
