@@ -21,34 +21,34 @@ public:
         }
         return back;
     }
+    ListNode* getknode(ListNode* head,int k){
+        ListNode*temp=head;
+        while(k>1 && temp!=nullptr){
+            k--;
+            temp=temp->next;
+        }
+        return temp;
+    }
     ListNode* reverseKGroup(ListNode* head, int k) {
         if(head==nullptr || head->next==nullptr)return head;
         ListNode* temp=head;
-        int count=1;
-        ListNode* knode=temp;
-        ListNode*prevtail=nullptr;
+        ListNode* prevtail=nullptr;
         while(temp!=nullptr){
-            count++;
-            knode=knode->next;
-            if(knode==nullptr){break;}
-            if(count%k==0 && k!=1){
-                ListNode* nextnode=knode->next;
-                knode->next=nullptr;
-                reverse(temp);
-                if(temp==head){
-                    head=knode;
-                }
-                else{
-                    prevtail->next=knode;
-                }
-                prevtail=temp;
-                temp->next=nextnode;
-                temp=temp->next;
-                count++;
-                knode=temp;   
+            ListNode* knode=getknode(temp,k);
+            if(knode==nullptr) break;
+            ListNode* nextnode=knode->next;
+            knode->next=nullptr;
+            reverse(temp);
+            if(head==temp){
+                head=knode;
             }
+            else{
+                prevtail->next=knode;
+            }
+            prevtail=temp;
+            temp->next=nextnode;
+            temp=temp->next;
         }
         return head;
-
     }
 };
