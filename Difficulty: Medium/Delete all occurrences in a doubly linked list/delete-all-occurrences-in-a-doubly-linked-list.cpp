@@ -19,25 +19,28 @@ class Solution {
     // Function to delete a specified node from the linked list
     Node* deleteAllOccurOfX(Node* head, int x) {
         Node* temp=head;
-        
         while(temp!=nullptr){
-            Node*curr=temp;
-            Node*back=curr->prev;
-            Node*front=curr->next;
-            temp=front;
-            if(curr->data==x){
-                if(curr->prev==nullptr){//curr is at head;
-                    front->prev=back;
-                    head=front;
+            Node*back=temp->prev;
+            Node*front=temp->next;
+            if(temp->data==x){
+                if(back==nullptr){
+                    if(front==nullptr){ //single node list.
+                        delete temp;
+                        return nullptr;
+                    }
+                    else{ //temp is at head.
+                        front->prev=back;
+                        head=front;
+                    }
                 }
-                else if(curr->next==nullptr){//curr is at tail;
+                else if(front==nullptr){//temp is at tail.
                     back->next=front;
                 }
-                else if(curr->prev!=nullptr && curr->next!=nullptr){
+                else{
                     front->prev=back;
                     back->next=front;
                 }
-                delete curr;
+                delete temp;
             }
             temp=front;
         }
