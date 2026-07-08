@@ -1,6 +1,7 @@
 class Solution {
 public:
     int myAtoi(string s) {
+        //iterative implementation.
         int n=s.size();
         int sign=1;
         int num=0;
