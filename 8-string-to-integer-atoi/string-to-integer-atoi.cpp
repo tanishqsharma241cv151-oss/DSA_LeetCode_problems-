@@ -1,25 +1,38 @@
 class Solution {
 public:
     int myAtoi(string s) {
-        //iterative implementation.
-        int n=s.size();
+        int sum=0;
         int sign=1;
-        int num=0;
         int i=0;
-        while(i<n){
-            if(s[i]==' '){i++;}
-            else break;
+        for(i=0;i<s.size();i++){
+            if(s[i]==' ')continue;
+            if(s[i]!=' ')break;
         }
-        if(i<n && s[i]=='-'){sign*=-1;i++;}
-        else if(i<n;s[i]=='+'){sign=1;i++;}
-        while(i<n && isdigit(s[i])){
-            int dig=s[i]-'0';
-            if(num>(INT_MAX-dig)/10){
-                return sign==-1?INT_MIN:INT_MAX;
+        if(s[i]=='-'){
+            sign*=(-1);i++;
+        }
+        else if(s[i]=='+'){
+            sign*=1; i++;
+        }
+        while(i<s.size()){
+            if(isdigit(s[i])){
+                if(s[i]=='0') continue;
+                int digi=s[i]-'0';
+                if(sum>(INT_MAX-digi)/10){
+                    return (sign<0)?INT_MIN:INT_MAX;
+                }
+                else{
+                    sum=sum*10+digi;
+                }   
             }
-            num=num*10+(s[i]-'0');
-            i++;  
+            else{
+                break;
+            }
+            i++;
         }
-        return num*sign;
+        return sum*sign ;
+
+        
+        
     }
 };
