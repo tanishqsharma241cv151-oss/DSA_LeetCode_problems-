@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void solve(map<int,vector<char>>&mpp,vector<string>&ans,string&digits,string curr,int ind){
+    void solve(map<int,vector<char>>&mpp,vector<string>&ans,string&digits,string&curr,int ind){
         if(ind==digits.size()){
             ans.push_back(curr);return;}
         for(int i=0;i<mpp[digits[ind]-'0'].size();i++){
