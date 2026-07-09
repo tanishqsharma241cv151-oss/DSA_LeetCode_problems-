@@ -4,10 +4,10 @@ public:
         if(i==nums.size()){
             ans.push_back(arr);return;
         }
-        solve(nums,ans,arr,i+1);
         arr.push_back(nums[i]);
         solve(nums,ans,arr,i+1);
         arr.pop_back();
+        solve(nums,ans,arr,i+1);
     }
     vector<vector<int>> subsets(vector<int>& nums) {
         int i=0;
