@@ -1,34 +1,20 @@
 class Solution {
 public:
-    bool safe(int row,int col,vector<string>&board,int n){
-        if(row<0||col<0||row>=n||col>=n) return false;
-        int row1=row,col1=col;
-        while(row>=0 && col>=0){
-            if(board[row][col]=='Q') return false;
-            row--;col--;
-        }
-        row=row1;col=col1;
-        while(col>=0){
-            if(board[row][col]=='Q') return false;
-            col--;
-        }
-        row=row1,col=col1;
-        while(row<n && col>=0){
-            if(board[row][col]=='Q') return false;
-            row++;col--;
-        }
-        row=row1,col=col1;
-        return true;
-    }
-    void fill(vector<vector<string>>&ans,vector<string>&board,int col,int n){
+    void fill(vector<vector<string>>&ans,vector<string>&board,int col,int n,vector<int>&lowerdia,vector<int>&upperdia,vector<int>&left){
         if(col==n){
             ans.push_back(board);return;
         }
         for(int row=0;row<n;row++){
-            if(safe(row,col,board,n)){
+            if(lowerdia[row+col]==0&&upperdia[(n-1)+col-row]==0&&left[row]==0){
                 board[row][col]='Q';
-                fill(ans,board,col+1,n);
+                lowerdia[row+col]=1;
+                upperdia[(n-1)+col-row]=1;
+                left[row]=1;
+                fill(ans,board,col+1,n,lowerdia,upperdia,left);
                 board[row][col]='.';
+                lowerdia[row+col]=0;
+                upperdia[(n-1)+col-row]=0;
+                left[row]=0;
             }
             
         }
@@ -40,8 +26,11 @@ public:
         for(int i=0;i<n;i++){
             board[i]=s;
         }
+        vector<int>lowerdia(2*n-1,0);
+        vector<int>upperdia(2*n-1,0);
+        vector<int>left(n,0);
         int col=0;
-        fill(ans,board,col,n);
+        fill(ans,board,col,n,lowerdia,upperdia,left);
         return ans;
     }
 };
