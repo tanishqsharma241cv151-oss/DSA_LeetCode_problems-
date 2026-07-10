@@ -1,5 +1,6 @@
 class Solution {
 public:
+    vector<vector<int>> directions{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
     bool find(vector<vector<char>>& board,string&word,int i,int j,int ind){
         if(ind==word.size()) return true; //true if we have found all the letters in the matrix board.
         int m=board.size(),n=board[0].size();
@@ -7,13 +8,12 @@ public:
         char temp=board[i][j];
         board[i][j]='$'; //its been marked visited.
         //iterate through all 4 directions.
-        bool found = find(board, word, i + 1, j, ind + 1) ||
-                    find(board, word, i - 1, j, ind + 1) ||
-                    find(board, word, i, j + 1, ind + 1) ||
-                    find(board, word, i, j - 1, ind + 1); 
+        for(auto& dir : directions) {
+            if(find(board,word, i+dir[0], j+dir[1], ind+1)) return true;
+        } 
         
         board[i][j]=temp;
-        return found;
+        return false;
     }
     bool exist(vector<vector<char>>& board, string word) {
         int ind=0;
