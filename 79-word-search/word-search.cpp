@@ -11,7 +11,6 @@ public:
         for(auto& dir : directions) {
             if(find(board,word, i+dir[0], j+dir[1], ind+1)) return true;
         } 
-        
         board[i][j]=temp;
         return false;
     }
