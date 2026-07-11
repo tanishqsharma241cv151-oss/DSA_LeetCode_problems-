@@ -15,8 +15,7 @@ public:
                 lowerdia[row+col]=0;
                 upperdia[(n-1)+col-row]=0;
                 left[row]=0;
-            }
-            
+            }    
         }
     }
     vector<vector<string>> solveNQueens(int n) {
