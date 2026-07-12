@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void solve(vector<string>&ans,string&num,string exp,int target,int ind,long currval,long residual){
+    void solve(vector<string>&ans,string&num,const string&exp,int target,int ind,long currval,long residual){
         //base case;
         if(ind==num.size()){
             if(currval==target)ans.push_back(exp);
