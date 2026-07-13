@@ -1,40 +1,56 @@
 class MinStack {
 public:
-    //modify the stack so that stores pairs. First element will store the value, second will store the minimum till that point.
-    stack<pair<int,int>>st;
-    int mini;
-
+    stack<long long>st;
+    long long mini;
     MinStack() {
-        mini=INT_MAX;
-    }
-    void push(int value) {
-        if(st.empty()){
-            st.push({value,value});
-        }
-        else{
-            st.push({value,min(value,st.top().second)});
-        }
-        
+        mini=LLONG_MAX;
     }
     
+    void push(int value) {
+        long long val=value;
+        if(st.empty()){
+            st.push(val);
+            mini=val;
+        }
+        else if(val>=mini){
+            st.push(val);
+        }
+        else if(val<mini){//store an encoded value;
+            st.push((long long)2*val-mini);
+            mini=val;
+
+        }
+    }
     void pop() {
         if(!st.empty()){
+            long long x=st.top();
             st.pop();
+            if(x<mini){
+                mini=2*mini-x;
+            }
         }
+        else{
+            return;
+        }
+        
         
     }
     
     int top() {
-        if(st.empty()) {return -1;}
-        else{
-            return st.top().first;
-        }  
+        if(st.empty()){return -1;}
+        long long x=st.top();
+        if(!st.empty()){
+            if(x<mini){ //x is the encoded element.
+                return (int)mini;
+            }
+            else return (int)x;
+        }
+        return 0;
     }
     
     int getMin() {
-        if(st.empty()){ return -1;
-        }
-        else return st.top().second;
+        return (int)mini;
+        
     }
 };
 
