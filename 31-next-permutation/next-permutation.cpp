@@ -3,12 +3,12 @@ public:
     void nextPermutation(vector<int>& nums) {
         int n=nums.size();
         if(n==0 || n==1){return;}
-        int p=-2;
+        int p=-1;
         for(int i=n-2;i>=0;i--){
             if(nums[i]<nums[i+1]){
                 p=i;break;}
         }
-        if(p==-2){
+        if(p==-1){
             reverse(nums.begin(),nums.end());
             return;
         }
