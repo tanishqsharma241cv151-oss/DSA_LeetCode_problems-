@@ -4,26 +4,19 @@ public:
         int n=s.size();
         unordered_map<char,int>mpp;
         int left=0,right=0;
+        int maxlen=0;
         string s1="";
-        while(left<n && right<n){
-            if(mpp.find(s[right])==mpp.end()){
-            }
-            else{
-                if(s1.size()<right-left){
-                    s1=s.substr(left,right-left);
+        for(right=0;right<n;right++){
+            char c=s[right];
+            if(mpp.find(c)!=mpp.end()){
+                //if its in the window, we move left.
+                if(mpp[c]>=left){
+                    left=mpp[c]+1;
                 }
-                mpp.clear();
-                left++;
-                right=left;
             }
-            mpp[s[right]]=1;
-            right++;
+            maxlen=max(maxlen,right-left+1);
+            mpp[c]=right;
         }
-        if(right-left>s1.size()){
-            s1=s.substr(left,right-left);
-        }
-        int m=s1.size();
-        return m;
-        
+        return maxlen;
     }
 };
